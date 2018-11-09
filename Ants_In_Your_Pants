@@ -1,0 +1,26 @@
+from gpiozero import MotionSensor
+from mcpi.minecraft import Minecraft
+from time import sleep
+import random
+
+mc = Minecraft.create()
+pir = MotionSensor(6)
+
+mc.postToChat("Hello Maker!")
+sleep(3)
+mc.postToChat("Infrared Sensors can see if you are moving")
+sleep(3)
+mc.postToChat("Try standing as still as possible.")
+sleep(3)
+mc.postToChat("I will know when you move!")
+sleep(3)
+mc.postToChat("Good Luck!")
+
+while True:
+    choice = random.randint(0,3)
+    stuff2say = ["Stand Still!", "Why did you move?", "Ants in Your Pants!", "I Win!!!"]
+    pir.wait_for_motion()
+    print(choice)
+    print("You Moved")
+    mc.postToChat(stuff2say[choice])
+    pir.wait_for_no_motion()
